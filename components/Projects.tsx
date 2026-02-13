@@ -52,6 +52,27 @@ export default function Projects() {
       github: "#",
       demo: "#",
     },
+    {
+      title: "Valentine's Proposal App",
+      description:
+        "A highly interactive and romantic proposal application featuring custom animations, playful user interactions, and a responsive mobile-first design.",
+      highlights: [
+        "Engineered a dynamic 'evasive button' mechanism using advanced event handling and collision detection logic",
+        "Implemented smooth, complex entry and exit animations using Framer Motion for an immersive user experience",
+        "Designed a fully responsive UI with Tailwind CSS, ensuring seamless performance across all device sizes",
+        "Optimized component rendering and state management in Next.js for fluid interactivity",
+      ],
+      tags: [
+        "Next.js",
+        "React.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+      ],
+      image: "bg-gradient-to-br from-rose-500 via-red-500 to-pink-600",
+      github: "https://github.com/ansariarifdev/be-my-valentine",
+      demo: "https://be-my-valentine-bay-delta.vercel.app/",
+    },
   ];
 
   const container = {
