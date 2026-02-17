@@ -6,6 +6,20 @@ import { Github, ExternalLink } from "lucide-react";
 export default function Projects() {
   const projects = [
     {
+      title: "BookMark Manager",
+      description:
+        "A feature-rich bookmark management application designed to help users organize, categorize, and access their favorite web resources efficiently.",
+      highlights: [
+        "Implemented secure user authentication and session management using Google OAuth",
+        "Leveraged Supabase and PostgreSQL to ensure robust data persistence, scalability, and real-time synchronization",
+        "Built a high-performance frontend with Next.js and TypeScript, ensuring type safety and SEO optimization",
+        "Designed a clean, responsive user interface for seamless bookmark organization, tagging, and retrieval",
+      ],
+      tags: ["TypeScript", "Next.js", "Supabase", "PostgreSQL", "Google OAuth"],
+      image: "bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600",
+      github: "https://github.com/ansariarifdev/bookmark-application/",
+    },
+    {
       title: "Live Attendance System",
       description:
         "Built a real-time attendance system using TypeScript, Node.js, Express.js, MongoDB, and WebSockets for low-latency communication.",
@@ -215,18 +229,20 @@ export default function Projects() {
                       />
                       Code
                     </motion.a>
-                    <motion.a
-                      href={project.demo}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm font-medium group/link"
-                    >
-                      <ExternalLink
-                        size={16}
-                        className="group-hover/link:translate-x-1 transition-transform duration-300"
-                      />
-                      Demo
-                    </motion.a>
+                    {project.demo && (
+                      <motion.a
+                        href={project.demo}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm font-medium group/link"
+                      >
+                        <ExternalLink
+                          size={16}
+                          className="group-hover/link:translate-x-1 transition-transform duration-300"
+                        />
+                        Demo
+                      </motion.a>
+                    )}
                   </div>
                 </div>
 
