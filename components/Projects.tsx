@@ -3,89 +3,88 @@
 import { motion } from "motion/react";
 import { Github, ExternalLink } from "lucide-react";
 
+interface Project {
+  title: string;
+  description: string;
+  highlights: string[];
+  tags: string[];
+  image: string;
+  github: string;
+  demo?: string;
+}
+
 export default function Projects() {
-  const projects = [
+  const projects: Project[] = [
     {
-      title: "BookMark Manager",
+      title: "Real-time Notification System (Backend)",
       description:
-        "A feature-rich bookmark management application designed to help users organize, categorize, and access their favorite web resources efficiently.",
+        "Built a scalable backend for a real-time notification system using Node.js, Express.js, TypeScript, Prisma, and PostgreSQL, enabling low-latency event delivery via WebSockets.",
       highlights: [
-        "Implemented secure user authentication and session management using Google OAuth",
-        "Leveraged Supabase and PostgreSQL to ensure robust data persistence, scalability, and real-time synchronization",
-        "Built a high-performance frontend with Next.js and TypeScript, ensuring type safety and SEO optimization",
-        "Designed a clean, responsive user interface for seamless bookmark organization, tagging, and retrieval",
-      ],
-      tags: ["TypeScript", "Next.js", "Supabase", "PostgreSQL", "Google OAuth"],
-      image: "bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600",
-      github: "https://github.com/ansariarifdev/bookmark-application/",
-    },
-    {
-      title: "Live Attendance System",
-      description:
-        "Built a real-time attendance system using TypeScript, Node.js, Express.js, MongoDB, and WebSockets for low-latency communication.",
-      highlights: [
-        "Improved throughput by approximately 200% by switching the runtime from Node.js to Bun.js",
-        "Designed REST APIs for user and attendance management with in-memory session handling for live sessions",
-        "Implemented token-based authentication using JSON Web Tokens (JWT) with enforced role-based access control (RBAC)",
-        "Added Zod-based schema validation with robust error handling and optimized real-time event unicasting and broadcasting",
+        "Designed an event-driven architecture for real-time notification delivery with efficient WebSocket-based communication",
+        "Optimized throughput and request handling by leveraging Bun.js as the runtime environment",
+        "Implemented JWT-based authentication with role-based access control (RBAC) for secure notification access",
+        "Modeled and managed notification data using PostgreSQL with Prisma ORM for type-safe queries and migrations",
       ],
       tags: [
         "Node.js",
         "Express.js",
-        "MongoDB",
-        "WebSockets",
-        "TypeScript",
-        "JWT",
         "Bun.js",
-        "Zod",
-      ],
-      image: "bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500",
-      github: "#",
-      demo: "#",
-    },
-    {
-      title: "Real-time Chat App (Backend)",
-      description:
-        "Built the backend of a real-time chat application using TypeScript, Node.js, Express.js, PostgreSQL, Prisma, and WebSockets.",
-      highlights: [
-        "Achieved up to 5× higher throughput and reduced latency to 30–50 ms (vs. 100–300 ms with long polling) by using WebSockets for real-time communication",
-        "Designed the PostgreSQL schema and used Prisma ORM for type-safe database access and migrations",
-        "Implemented cookie-based authentication with role-based access control (RBAC), along with chat rooms and message persistence",
-        "Handled concurrent connections and optimized real-time message broadcasting",
-      ],
-      tags: [
-        "Node.js",
-        "Express.js",
         "PostgreSQL",
         "Prisma",
         "WebSockets",
         "TypeScript",
-        "RBAC",
+        "JWT",
       ],
-      image: "bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500",
-      github: "#",
-      demo: "#",
+      image: "bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-600",
+      github: "https://github.com/ansariarifdev/realtime-notification-system-",
     },
     {
-      title: "Valentine's Proposal App",
+      title: "Real-time Chat Application (Backend)",
       description:
-        "A highly interactive and romantic proposal application featuring custom animations, playful user interactions, and a responsive mobile-first design.",
+        "Engineered a high-performance backend for a real-time chat application using Node.js, Express.js, TypeScript, Prisma, and PostgreSQL with WebSocket-based communication.",
       highlights: [
-        "Engineered a dynamic 'evasive button' mechanism using advanced event handling and collision detection logic",
-        "Implemented smooth, complex entry and exit animations using Framer Motion for an immersive user experience",
-        "Designed a fully responsive UI with Tailwind CSS, ensuring seamless performance across all device sizes",
-        "Optimized component rendering and state management in Next.js for fluid interactivity",
+        "Achieved up to 5× higher throughput and reduced latency to ~30–50 ms by replacing long polling with WebSockets",
+        "Designed PostgreSQL schema and leveraged Prisma ORM for type-safe database access and efficient migrations",
+        "Implemented JWT-based authentication with RBAC, supporting chat rooms and persistent message storage",
+        "Optimized concurrent connections and real-time message broadcasting for reliable and scalable communication",
       ],
       tags: [
-        "Next.js",
-        "React.js",
+        "Node.js",
+        "Express.js",
+        "Bun.js",
+        "PostgreSQL",
+        "Prisma",
+        "WebSockets",
         "TypeScript",
-        "Tailwind CSS",
-        "Framer Motion",
+        "JWT",
       ],
-      image: "bg-gradient-to-br from-rose-500 via-red-500 to-pink-600",
-      github: "https://github.com/ansariarifdev/be-my-valentine",
-      demo: "https://be-my-valentine-bay-delta.vercel.app/",
+      image: "bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500",
+      github: "https://github.com/ansariarifdev/chat-application",
+    },
+    {
+      title: "Live Attendance System (Backend)",
+      description:
+        "Developed a real-time attendance backend using Node.js, Express.js, TypeScript, Prisma, and PostgreSQL, enabling low-latency communication via WebSockets.",
+      highlights: [
+        "Boosted backend throughput by ~200% by migrating runtime from Node.js to Bun.js, improving request handling performance",
+        "Designed RESTful APIs for user and attendance management with efficient in-memory session handling",
+        "Implemented JWT-based authentication with role-based access control (RBAC) for secure and protected routes",
+        "Integrated Zod-based validation with centralized error handling and optimized real-time event delivery via unicasting and broadcasting",
+      ],
+      tags: [
+        "Node.js",
+        "Express.js",
+        "Bun.js",
+        "PostgreSQL",
+        "Prisma",
+        "WebSockets",
+        "TypeScript",
+        "JWT",
+        "Zod",
+      ],
+      image: "bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500",
+      github:
+        "https://github.com/ansariarifdev/realtime-attendance-system-backend",
     },
   ];
 
