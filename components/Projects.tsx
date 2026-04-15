@@ -218,6 +218,9 @@ export default function Projects() {
                   <div className="flex gap-3 pt-4 border-t border-white/10 mt-auto">
                     <motion.a
                       href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm font-medium group/link"
@@ -231,6 +234,9 @@ export default function Projects() {
                     {project.demo && (
                       <motion.a
                         href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm font-medium group/link"
