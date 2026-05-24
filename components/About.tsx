@@ -2,158 +2,145 @@
 
 import { motion } from "motion/react";
 import { Server, Zap, Shield } from "lucide-react";
+import { SectionHeader } from "@/components/section-header";
+import { Section } from "@/components/site-shell";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+const features = [
+  {
+    icon: Server,
+    title: "Scalable backend systems",
+    description:
+      "Architecting high-performance server-side applications with Node.js, Bun, and modern frameworks — from monoliths to modular services.",
+    tech: ["Node.js", "Bun", "Hono", "Microservices"],
+  },
+  {
+    icon: Zap,
+    title: "Real-time infrastructure",
+    description:
+      "Event-driven architectures for live interaction — WebSockets, pub/sub messaging, and low-latency data pipelines at scale.",
+    tech: ["WebSockets", "Socket.io", "Redis", "Pub/Sub"],
+  },
+  {
+    icon: Shield,
+    title: "Data & security",
+    description:
+      "Type-safe database schemas, secure auth flows, RBAC, SQL optimization, and containerized deployments.",
+    tech: ["PostgreSQL", "Prisma", "JWT", "Docker"],
+  },
+];
+
+const stats = [
+  { number: "5+", label: "Projects" },
+  { number: "10+", label: "Collaborated" },
+  { number: "1+", label: "Years hands-on" },
+];
+
+const listVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
 
 export default function About() {
-  const features = [
-    {
-      icon: Server,
-      title: "Scalable Backend Systems",
-      description:
-        "Architecting high-performance server-side applications. Specialist in migrating legacy monolithic systems to modern, modular microservices using Node.js, Bun, and Hono.",
-      tech: ["Node.js", "Bun", "Hono", "Microservices"],
-    },
-    {
-      icon: Zap,
-      title: "Real-Time Infrastructure",
-      description:
-        "Building event-driven architectures for live interaction. Expert in handling high-concurrency WebSocket connections, pub/sub messaging, and low-latency data pipelines.",
-      tech: ["WebSockets", "Socket.io", "Redis", "Pub/Sub"],
-    },
-    {
-      icon: Shield,
-      title: "Data & Security",
-      description:
-        "Designing robust, type-safe database schemas and secure auth flows. Implementing advanced RBAC, complex SQL optimization, and containerized deployments.",
-      tech: ["PostgreSQL", "Prisma", "JWT", "Docker"],
-    },
-  ];
-
   return (
-    <section
-      id="about"
-      className="relative py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-black via-blue-900/10 to-black overflow-hidden"
-    >
-      {/* Gradient Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 -right-40 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob" />
-        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000" />
-      </div>
+    <Section id="about" variant="muted">
+      <SectionHeader
+        label="About"
+        title="Engineering reliable systems end to end"
+        description="Backend-focused developer with a strong full-stack toolkit — building APIs, real-time features, and user-facing products."
+        align="left"
+      />
 
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
+      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="space-y-6"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-3">
-            <span className="bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              About Me
-            </span>
-          </h2>
-          <p className="text-white/60 max-w-xl mx-auto text-base sm:text-lg">
-            Backend-focused developer building reliable, real-time systems
+          <p className="text-base leading-relaxed text-foreground/90">
+            I build scalable backends and APIs with TypeScript, Node.js, and
+            modern runtimes. My focus spans real-time systems, clean REST
+            contracts, and performance — from WebSockets to databases and auth.
           </p>
+          <p className="text-base leading-relaxed text-muted-foreground">
+            I translate product requirements into maintainable code: robust
+            validation, role-based access, and optimized messaging. Throughput,
+            latency, and long-term maintainability guide every decision.
+          </p>
+
+          <dl className="grid grid-cols-3 gap-6 border-t border-border pt-8">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <dt className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                  {stat.number}
+                </dt>
+                <dd className="mt-1 text-sm text-muted-foreground">
+                  {stat.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </motion.div>
 
-        {/* Main About Content */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-14">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="space-y-5"
-          >
-            <p className="text-white/85 text-base sm:text-lg leading-relaxed">
-              I build scalable backends and APIs with TypeScript, Node.js, and
-              modern runtimes. I focus on real-time systems, clean APIs, and
-              performance—from REST and WebSockets to databases and auth.
-            </p>
-            <p className="text-white/75 text-base leading-relaxed">
-              I turn product requirements into maintainable code: robust
-              validation, role-based access, and optimized real-time messaging.
-              I care about throughput, latency, and long-term maintainability.
-            </p>
-
-            {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-6">
-              {[
-                { number: "5+", label: "Projects" },
-                { number: "10+", label: "Collaborated" },
-                { number: "1+", label: "Years Hands-on" },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.08 }}
-                  viewport={{ once: true }}
-                  className="text-center"
-                >
-                  <div className="text-2xl sm:text-3xl font-bold bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    {stat.number}
-                  </div>
-                  <div className="text-white/55 text-xs sm:text-sm mt-0.5">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right Content - Features */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.06 }}
-                  viewport={{ once: true }}
-                  whileHover={{ x: 6 }}
-                  className="group border border-white/10 rounded-xl p-5 hover:border-blue-500/40 hover:bg-blue-500/5 transition-all duration-300 cursor-default"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-2.5 rounded-lg bg-linear-to-br from-blue-500/20 to-purple-500/20 group-hover:from-blue-500/25 group-hover:to-purple-500/25 transition-all shrink-0">
-                      <Icon className="w-5 h-5 text-blue-400" />
+        <motion.div
+          className="space-y-4"
+          variants={listVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+        >
+          {features.map((feature) => {
+            const Icon = feature.icon;
+            return (
+              <motion.div key={feature.title} variants={cardVariants}>
+                <Card className="transition-shadow hover:shadow-md">
+                  <CardHeader className="flex flex-row items-start gap-4 space-y-0 pb-2">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <Icon className="size-5" />
                     </div>
-                    <div className="min-w-0">
-                      <h3 className="text-white font-semibold text-sm sm:text-base mb-1">
-                        {feature.title}
-                      </h3>
-                      <p className="text-white/55 text-xs sm:text-sm leading-relaxed mb-3">
+                    <div className="min-w-0 space-y-1">
+                      <CardTitle className="text-base">{feature.title}</CardTitle>
+                      <CardDescription className="leading-relaxed">
                         {feature.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {feature.tech.map((tech, i) => (
-                          <span
-                            key={i}
-                            className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                      </CardDescription>
                     </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
+                  </CardHeader>
+                  <CardContent className="pl-[4.5rem] pt-0">
+                    <div className="flex flex-wrap gap-2">
+                      {feature.tech.map((tech) => (
+                        <Badge key={tech} variant="secondary" className="font-normal">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
-    </section>
+    </Section>
   );
 }

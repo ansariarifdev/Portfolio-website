@@ -2,321 +2,247 @@
 
 import { motion } from "motion/react";
 import { Github, ExternalLink } from "lucide-react";
+import { SectionHeader } from "@/components/section-header";
+import { Section } from "@/components/site-shell";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 interface Project {
   title: string;
   description: string;
   highlights: string[];
   tags: string[];
-  image: string;
+  accent: string;
   github: string;
   demo?: string;
 }
 
+const projects: Project[] = [
+  {
+    title: "Course Selling Website",
+    description:
+      "CourseVault — a full-stack online courses marketplace where learners browse and purchase courses while creators publish content and track enrollments.",
+    highlights: [
+      "Role-based auth for learners and course creators",
+      "PostgreSQL + Prisma for courses and enrollments",
+      "Simulated checkout with lifetime access",
+      "Zod validation across API and forms",
+    ],
+    tags: ["React.js", "Next.js", "TypeScript", "PostgreSQL", "Prisma", "Zod"],
+    accent: "from-amber-100 to-orange-50",
+    github: "https://github.com/ansariarifdev/course-selling-website",
+    demo: "https://course-selling-website-alpha-three.vercel.app/",
+  },
+  {
+    title: "Bookmark Manager",
+    description:
+      "Bookmarker — a link manager with categories, debounced search, public sharing, and import/export for organized bookmark libraries.",
+    highlights: [
+      "Dashboard with category filters and instant search",
+      "Public sharing with view analytics",
+      "HTML import/export and keyboard shortcuts",
+      "PostgreSQL + Prisma data modeling",
+    ],
+    tags: ["React.js", "Next.js", "TypeScript", "PostgreSQL", "Prisma"],
+    accent: "from-emerald-100 to-teal-50",
+    github: "https://github.com/ansariarifdev/bookmark-manager",
+    demo: "https://bookmark-manager-kohl.vercel.app/",
+  },
+  {
+    title: "Real-time Notification System",
+    description:
+      "Scalable backend for low-latency notification delivery via WebSockets with event-driven architecture.",
+    highlights: [
+      "Event-driven WebSocket communication",
+      "Bun.js runtime for improved throughput",
+      "JWT auth with RBAC",
+      "PostgreSQL + Prisma ORM",
+    ],
+    tags: [
+      "Node.js",
+      "Express.js",
+      "Bun.js",
+      "PostgreSQL",
+      "Prisma",
+      "WebSockets",
+      "TypeScript",
+      "JWT",
+    ],
+    accent: "from-indigo-100 to-violet-50",
+    github: "https://github.com/ansariarifdev/realtime-notification-system-",
+  },
+  {
+    title: "Real-time Chat Application",
+    description:
+      "High-performance chat backend with WebSocket-based messaging, rooms, and persistent storage.",
+    highlights: [
+      "5× throughput vs long polling; ~30–50 ms latency",
+      "PostgreSQL schema with Prisma migrations",
+      "JWT + RBAC for chat rooms",
+      "Optimized concurrent broadcasting",
+    ],
+    tags: [
+      "Node.js",
+      "Express.js",
+      "Bun.js",
+      "PostgreSQL",
+      "Prisma",
+      "WebSockets",
+      "TypeScript",
+      "JWT",
+    ],
+    accent: "from-purple-100 to-pink-50",
+    github: "https://github.com/ansariarifdev/chat-application",
+  },
+  {
+    title: "Live Attendance System",
+    description:
+      "Real-time attendance backend with WebSockets, session handling, and optimized event delivery.",
+    highlights: [
+      "~200% throughput gain migrating to Bun.js",
+      "REST APIs with in-memory sessions",
+      "JWT + RBAC on protected routes",
+      "Zod validation and unicasting/broadcasting",
+    ],
+    tags: [
+      "Node.js",
+      "Express.js",
+      "Bun.js",
+      "PostgreSQL",
+      "Prisma",
+      "WebSockets",
+      "TypeScript",
+      "JWT",
+      "Zod",
+    ],
+    accent: "from-sky-100 to-cyan-50",
+    github:
+      "https://github.com/ansariarifdev/realtime-attendance-system-backend",
+  },
+];
+
+const container = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
 export default function Projects() {
-  const projects: Project[] = [
-    {
-      title: "Course Selling Website",
-      description:
-        "Built CourseVault, a full-stack online courses marketplace where learners browse and purchase courses while creators publish content, manage pricing, and track enrollments from a dedicated dashboard.",
-      highlights: [
-        "Implemented email/password authentication with role-based access for learners and course creators",
-        "Designed a PostgreSQL schema with Prisma ORM for courses, enrollments, and creator analytics",
-        "Built simulated checkout flow with one-time pricing and lifetime course access after purchase",
-        "Validated API inputs and forms with Zod for type-safe server and client-side data handling",
-      ],
-      tags: [
-        "React.js",
-        "Next.js",
-        "TypeScript",
-        "PostgreSQL",
-        "Prisma",
-        "Zod",
-      ],
-      image: "bg-gradient-to-br from-amber-500 via-orange-500 to-rose-600",
-      github: "https://github.com/ansariarifdev/course-selling-website",
-      demo: "https://course-selling-website-alpha-three.vercel.app/",
-    },
-    {
-      title: "Bookmark Manager",
-      description:
-        "Developed Bookmarker, a full-featured link manager with categories, debounced search, public sharing, and import/export — giving users a dashboard to organize, discover, and share bookmarks at scale.",
-      highlights: [
-        "Built a responsive dashboard with category filters and instant search across titles and descriptions",
-        "Enabled public bookmark sharing with view tracking and analytics for shared links",
-        "Integrated HTML import/export and keyboard shortcuts (Ctrl+K search, Ctrl+N add) for power users",
-        "Modeled user bookmarks and categories in PostgreSQL with Prisma for type-safe queries and migrations",
-      ],
-      tags: [
-        "React.js",
-        "Next.js",
-        "TypeScript",
-        "PostgreSQL",
-        "Prisma",
-      ],
-      image: "bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600",
-      github: "https://github.com/ansariarifdev/bookmark-manager",
-      demo: "https://bookmark-manager-kohl.vercel.app/",
-    },
-    {
-      title: "Real-time Notification System (Backend)",
-      description:
-        "Built a scalable backend for a real-time notification system using Node.js, Express.js, TypeScript, Prisma, and PostgreSQL, enabling low-latency event delivery via WebSockets.",
-      highlights: [
-        "Designed an event-driven architecture for real-time notification delivery with efficient WebSocket-based communication",
-        "Optimized throughput and request handling by leveraging Bun.js as the runtime environment",
-        "Implemented JWT-based authentication with role-based access control (RBAC) for secure notification access",
-        "Modeled and managed notification data using PostgreSQL with Prisma ORM for type-safe queries and migrations",
-      ],
-      tags: [
-        "Node.js",
-        "Express.js",
-        "Bun.js",
-        "PostgreSQL",
-        "Prisma",
-        "WebSockets",
-        "TypeScript",
-        "JWT",
-      ],
-      image: "bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-600",
-      github: "https://github.com/ansariarifdev/realtime-notification-system-",
-    },
-    {
-      title: "Real-time Chat Application (Backend)",
-      description:
-        "Engineered a high-performance backend for a real-time chat application using Node.js, Express.js, TypeScript, Prisma, and PostgreSQL with WebSocket-based communication.",
-      highlights: [
-        "Achieved up to 5× higher throughput and reduced latency to ~30–50 ms by replacing long polling with WebSockets",
-        "Designed PostgreSQL schema and leveraged Prisma ORM for type-safe database access and efficient migrations",
-        "Implemented JWT-based authentication with RBAC, supporting chat rooms and persistent message storage",
-        "Optimized concurrent connections and real-time message broadcasting for reliable and scalable communication",
-      ],
-      tags: [
-        "Node.js",
-        "Express.js",
-        "Bun.js",
-        "PostgreSQL",
-        "Prisma",
-        "WebSockets",
-        "TypeScript",
-        "JWT",
-      ],
-      image: "bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500",
-      github: "https://github.com/ansariarifdev/chat-application",
-    },
-    {
-      title: "Live Attendance System (Backend)",
-      description:
-        "Developed a real-time attendance backend using Node.js, Express.js, TypeScript, Prisma, and PostgreSQL, enabling low-latency communication via WebSockets.",
-      highlights: [
-        "Boosted backend throughput by ~200% by migrating runtime from Node.js to Bun.js, improving request handling performance",
-        "Designed RESTful APIs for user and attendance management with efficient in-memory session handling",
-        "Implemented JWT-based authentication with role-based access control (RBAC) for secure and protected routes",
-        "Integrated Zod-based validation with centralized error handling and optimized real-time event delivery via unicasting and broadcasting",
-      ],
-      tags: [
-        "Node.js",
-        "Express.js",
-        "Bun.js",
-        "PostgreSQL",
-        "Prisma",
-        "WebSockets",
-        "TypeScript",
-        "JWT",
-        "Zod",
-      ],
-      image: "bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500",
-      github:
-        "https://github.com/ansariarifdev/realtime-attendance-system-backend",
-    },
-  ];
-
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
   return (
-    <section
-      id="projects"
-      className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-blue-900/5 to-black overflow-hidden"
-    >
-      {/* Gradient Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 -right-40 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob" />
-        <div className="absolute bottom-1/4 -left-40 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000" />
-      </div>
+    <Section id="projects" variant="muted" containerClassName="max-w-none">
+      <SectionHeader
+        label="Projects"
+        title="Featured work"
+        description="Full-stack applications and real-time backends — from marketplaces to WebSocket-driven systems."
+      />
 
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Featured Projects
-            </span>
-          </h2>
-          <p className="text-white/60 max-w-2xl mx-auto text-lg">
-            Showcasing real-time backend systems with WebSocket integration,
-            performance optimization, and scalable architecture
-          </p>
-        </motion.div>
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        className="grid gap-6 md:grid-cols-2"
+      >
+        {projects.map((project) => (
+          <motion.div key={project.title} variants={item}>
+            <Card className="flex h-full flex-col overflow-hidden pt-0 transition-shadow hover:shadow-md">
+              <div
+                className={`bg-gradient-to-br ${project.accent} border-b border-border px-6 py-8`}
+              >
+                <CardTitle className="text-lg">{project.title}</CardTitle>
+              </div>
 
-        {/* Projects Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-8 mb-16"
-        >
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              variants={item}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative h-full"
-            >
-              {/* Card */}
-              <div className="relative h-full border border-white/10 rounded-xl overflow-hidden bg-black/50 backdrop-blur hover:border-blue-500/50 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20">
-                {/* Image/Gradient Area */}
-                <div
-                  className={`h-48 ${project.image} opacity-90 group-hover:opacity-100 transition-opacity duration-300 relative overflow-hidden`}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-6 right-6">
-                    <h3 className="text-2xl font-bold text-white drop-shadow-lg">
-                      {project.title}
-                    </h3>
-                  </div>
+              <CardHeader className="pb-2">
+                <CardDescription className="leading-relaxed">
+                  {project.description}
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent className="flex-1 space-y-4 pt-0">
+                <ul className="space-y-2">
+                  {project.highlights.map((highlight) => (
+                    <li
+                      key={highlight}
+                      className="flex gap-2 text-sm text-muted-foreground"
+                    >
+                      <span className="mt-2 size-1 shrink-0 rounded-full bg-primary" />
+                      <span className="leading-relaxed">{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary" className="font-normal">
+                      {tag}
+                    </Badge>
+                  ))}
                 </div>
+              </CardContent>
 
-                {/* Content */}
-                <div className="p-6 flex flex-col">
-                  <p className="text-white/80 text-sm mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  {/* Highlights */}
-                  {project.highlights && (
-                    <div className="mb-6 space-y-2">
-                      {project.highlights.map((highlight, highlightIndex) => (
-                        <motion.div
-                          key={highlightIndex}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{
-                            delay: highlightIndex * 0.1,
-                            duration: 0.3,
-                          }}
-                          viewport={{ once: true }}
-                          className="flex items-start gap-2 text-white/70 text-sm"
-                        >
-                          <span className="text-blue-400 mt-1.5 flex-shrink-0">
-                            •
-                          </span>
-                          <span className="leading-relaxed">{highlight}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag, tagIndex) => (
-                      <motion.span
-                        key={tagIndex}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: tagIndex * 0.05 }}
-                        viewport={{ once: true }}
-                        whileHover={{ scale: 1.1 }}
-                        className="px-3 py-1 rounded-md text-xs font-medium border border-white/20 text-white/80 bg-white/5 hover:bg-white/10 hover:border-blue-400/50 transition-all duration-200"
-                      >
-                        {tag}
-                      </motion.span>
-                    ))}
-                  </div>
-
-                  {/* Links */}
-                  <div className="flex gap-3 pt-4 border-t border-white/10 mt-auto">
-                    <motion.a
-                      href={project.github}
+              <CardFooter className="gap-2 border-t pt-6">
+                <Button variant="ghost" size="sm" asChild>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="size-4" />
+                    Code
+                  </a>
+                </Button>
+                {project.demo && (
+                  <Button variant="ghost" size="sm" asChild>
+                    <a
+                      href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm font-medium group/link"
                     >
-                      <Github
-                        size={16}
-                        className="group-hover/link:rotate-12 transition-transform duration-300"
-                      />
-                      Code
-                    </motion.a>
-                    {project.demo && (
-                      <motion.a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm font-medium group/link"
-                      >
-                        <ExternalLink
-                          size={16}
-                          className="group-hover/link:translate-x-1 transition-transform duration-300"
-                        />
-                        Demo
-                      </motion.a>
-                    )}
-                  </div>
-                </div>
+                      <ExternalLink className="size-4" />
+                      Live demo
+                    </a>
+                  </Button>
+                )}
+              </CardFooter>
+            </Card>
+          </motion.div>
+        ))}
+      </motion.div>
 
-                {/* Hover Glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 pointer-events-none" />
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* View All Projects CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <a href="#" className="group relative inline-block">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300" />
-            <button className="relative px-8 py-3 bg-black rounded-lg text-white font-semibold transition-transform transform group-hover:scale-105 border border-white/20 group-hover:border-white/50">
-              View All Projects
-            </button>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="mt-12 text-center"
+      >
+        <Separator className="mb-8" />
+        <Button variant="outline" asChild>
+          <a
+            href="https://github.com/ansariarifdev"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View all on GitHub
+            <ExternalLink className="size-4" />
           </a>
-        </motion.div>
-      </div>
-    </section>
+        </Button>
+      </motion.div>
+    </Section>
   );
 }
