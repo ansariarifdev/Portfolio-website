@@ -16,6 +16,49 @@ interface Project {
 export default function Projects() {
   const projects: Project[] = [
     {
+      title: "Course Selling Website",
+      description:
+        "Built CourseVault, a full-stack online courses marketplace where learners browse and purchase courses while creators publish content, manage pricing, and track enrollments from a dedicated dashboard.",
+      highlights: [
+        "Implemented email/password authentication with role-based access for learners and course creators",
+        "Designed a PostgreSQL schema with Prisma ORM for courses, enrollments, and creator analytics",
+        "Built simulated checkout flow with one-time pricing and lifetime course access after purchase",
+        "Validated API inputs and forms with Zod for type-safe server and client-side data handling",
+      ],
+      tags: [
+        "React.js",
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+        "Zod",
+      ],
+      image: "bg-gradient-to-br from-amber-500 via-orange-500 to-rose-600",
+      github: "https://github.com/ansariarifdev/course-selling-website",
+      demo: "https://course-selling-website-alpha-three.vercel.app/",
+    },
+    {
+      title: "Bookmark Manager",
+      description:
+        "Developed Bookmarker, a full-featured link manager with categories, debounced search, public sharing, and import/export — giving users a dashboard to organize, discover, and share bookmarks at scale.",
+      highlights: [
+        "Built a responsive dashboard with category filters and instant search across titles and descriptions",
+        "Enabled public bookmark sharing with view tracking and analytics for shared links",
+        "Integrated HTML import/export and keyboard shortcuts (Ctrl+K search, Ctrl+N add) for power users",
+        "Modeled user bookmarks and categories in PostgreSQL with Prisma for type-safe queries and migrations",
+      ],
+      tags: [
+        "React.js",
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+      ],
+      image: "bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600",
+      github: "https://github.com/ansariarifdev/bookmark-manager",
+      demo: "https://bookmark-manager-kohl.vercel.app/",
+    },
+    {
       title: "Real-time Notification System (Backend)",
       description:
         "Built a scalable backend for a real-time notification system using Node.js, Express.js, TypeScript, Prisma, and PostgreSQL, enabling low-latency event delivery via WebSockets.",
