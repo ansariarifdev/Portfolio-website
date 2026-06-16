@@ -7,10 +7,11 @@ interface SiteShellProps {
 
 export function SiteShell({ children, className }: SiteShellProps) {
   return (
-    <div className="min-h-screen bg-muted/40">
+    <div className="relative min-h-screen bg-muted/30">
+      <div className="site-grid pointer-events-none fixed inset-0 opacity-40" />
       <div
         className={cn(
-          "relative mx-auto min-h-screen w-full max-w-5xl border-x border-border bg-background shadow-sm",
+          "relative mx-auto min-h-screen w-full max-w-6xl border-x border-border/80 bg-background/95 shadow-sm backdrop-blur-sm",
           className,
         )}
       >
@@ -39,13 +40,13 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "scroll-mt-20 px-6 py-20 sm:px-10 md:py-28",
-        variant === "muted" && "bg-muted/50",
+        "scroll-mt-[4.5rem] border-b border-border/60 px-6 py-24 sm:px-10 md:py-32",
+        variant === "muted" && "bg-muted/40",
         className,
       )}
     >
       <div
-        className={cn("mx-auto w-full max-w-3xl", containerClassName)}
+        className={cn("mx-auto w-full max-w-4xl", containerClassName)}
       >
         {children}
       </div>

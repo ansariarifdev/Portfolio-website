@@ -48,25 +48,25 @@
 }
 
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.995 0 0);
-  --foreground: oklch(0.18 0.01 260);
+  --radius: 0.625rem;
+  --background: oklch(0.99 0.002 260);
+  --foreground: oklch(0.17 0.015 260);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.01 260);
+  --card-foreground: oklch(0.17 0.015 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.01 260);
-  --primary: oklch(0.35 0.08 260);
+  --popover-foreground: oklch(0.17 0.015 260);
+  --primary: oklch(0.28 0.04 260);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.96 0.005 260);
-  --secondary-foreground: oklch(0.25 0.02 260);
-  --muted: oklch(0.965 0.005 260);
-  --muted-foreground: oklch(0.5 0.02 260);
-  --accent: oklch(0.96 0.01 260);
-  --accent-foreground: oklch(0.25 0.02 260);
+  --secondary: oklch(0.965 0.006 260);
+  --secondary-foreground: oklch(0.28 0.02 260);
+  --muted: oklch(0.965 0.006 260);
+  --muted-foreground: oklch(0.48 0.02 260);
+  --accent: oklch(0.955 0.008 260);
+  --accent-foreground: oklch(0.22 0.02 260);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.91 0.005 260);
-  --input: oklch(0.91 0.005 260);
-  --ring: oklch(0.55 0.06 260);
+  --border: oklch(0.905 0.008 260);
+  --input: oklch(0.905 0.008 260);
+  --ring: oklch(0.55 0.04 260);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -92,17 +92,37 @@
   }
 
   body {
-    @apply bg-muted/40 font-sans text-foreground antialiased;
+    @apply bg-background font-sans text-foreground antialiased;
   }
 
   ::selection {
-    @apply bg-primary/15 text-foreground;
+    @apply bg-primary/10 text-foreground;
   }
 }
 
 @layer utilities {
+  .site-grid {
+    background-image:
+      linear-gradient(to right, oklch(0.905 0.008 260 / 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.905 0.008 260 / 0.5) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: center top;
+  }
+
+  .surface-card {
+    @apply rounded-xl border border-border bg-card shadow-sm transition-all duration-300;
+  }
+
+  .surface-card-hover {
+    @apply hover:border-border/80 hover:shadow-md;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
@@ -110,6 +130,6 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-border hover:bg-muted-foreground/30;
+    @apply rounded-full bg-border hover:bg-muted-foreground/25;
   }
 }

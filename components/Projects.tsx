@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 import { SectionHeader } from "@/components/section-header";
 import { Section } from "@/components/site-shell";
 import { Badge } from "@/components/ui/badge";
@@ -14,14 +14,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { fadeInUp, staggerContainer, viewportOnce } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 interface Project {
   title: string;
   description: string;
   highlights: string[];
   tags: string[];
-  accent: string;
   github: string;
   demo?: string;
 }
@@ -38,7 +38,6 @@ const projects: Project[] = [
       "Zod validation across API and forms",
     ],
     tags: ["React.js", "Next.js", "TypeScript", "PostgreSQL", "Prisma", "Zod"],
-    accent: "from-amber-100 to-orange-50",
     github: "https://github.com/ansariarifdev/course-selling-website",
     demo: "https://course-selling-website-alpha-three.vercel.app/",
   },
@@ -53,7 +52,6 @@ const projects: Project[] = [
       "PostgreSQL + Prisma data modeling",
     ],
     tags: ["React.js", "Next.js", "TypeScript", "PostgreSQL", "Prisma"],
-    accent: "from-emerald-100 to-teal-50",
     github: "https://github.com/ansariarifdev/bookmark-manager",
     demo: "https://bookmark-manager-kohl.vercel.app/",
   },
@@ -77,7 +75,6 @@ const projects: Project[] = [
       "TypeScript",
       "JWT",
     ],
-    accent: "from-indigo-100 to-violet-50",
     github: "https://github.com/ansariarifdev/realtime-notification-system-",
   },
   {
@@ -100,7 +97,6 @@ const projects: Project[] = [
       "TypeScript",
       "JWT",
     ],
-    accent: "from-purple-100 to-pink-50",
     github: "https://github.com/ansariarifdev/chat-application",
   },
   {
@@ -124,29 +120,14 @@ const projects: Project[] = [
       "JWT",
       "Zod",
     ],
-    accent: "from-sky-100 to-cyan-50",
     github:
       "https://github.com/ansariarifdev/realtime-attendance-system-backend",
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-
 export default function Projects() {
   return (
-    <Section id="projects" variant="muted" containerClassName="max-w-none">
+    <Section id="projects" variant="muted" containerClassName="max-w-5xl">
       <SectionHeader
         label="Projects"
         title="Featured work"
@@ -154,92 +135,132 @@ export default function Projects() {
       />
 
       <motion.div
-        variants={container}
+        variants={staggerContainer(0.1)}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        className="grid gap-6 md:grid-cols-2"
+        viewport={viewportOnce}
+        className="grid gap-5 md:grid-cols-2"
       >
-        {projects.map((project) => (
-          <motion.div key={project.title} variants={item}>
-            <Card className="flex h-full flex-col overflow-hidden pt-0 transition-shadow hover:shadow-md">
-              <div
-                className={`bg-gradient-to-br ${project.accent} border-b border-border px-6 py-8`}
+        {projects.map((project, index) => (
+          <motion.div
+            key={project.title}
+            variants={fadeInUp}
+            className={cn(index === 0 && "md:col-span-2")}
+          >
+            <Card
+              className={cn(
+                "surface-card-hover group h-full gap-0 overflow-hidden py-0 shadow-none",
+                index === 0 && "md:flex md:flex-row",
+              )}
+            >
+              <CardHeader
+                className={cn(
+                  "space-y-3 px-6 py-6",
+                  index === 0 && "md:flex-1 md:border-r md:border-border/60",
+                )}
               >
-                <CardTitle className="text-lg">{project.title}</CardTitle>
-              </div>
-
-              <CardHeader className="pb-2">
-                <CardDescription className="leading-relaxed">
-                  {project.description}
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent className="flex-1 space-y-4 pt-0">
-                <ul className="space-y-2">
-                  {project.highlights.map((highlight) => (
-                    <li
-                      key={highlight}
-                      className="flex gap-2 text-sm text-muted-foreground"
-                    >
-                      <span className="mt-2 size-1 shrink-0 rounded-full bg-primary" />
-                      <span className="leading-relaxed">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary" className="font-normal">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-
-              <CardFooter className="gap-2 border-t pt-6">
-                <Button variant="ghost" size="sm" asChild>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Github className="size-4" />
-                    Code
-                  </a>
-                </Button>
-                {project.demo && (
-                  <Button variant="ghost" size="sm" asChild>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="space-y-2">
+                    <span className="font-mono text-xs text-muted-foreground">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <CardTitle className="text-lg font-semibold tracking-tight">
+                      {project.title}
+                    </CardTitle>
+                  </div>
+                  {project.demo && (
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border bg-background text-muted-foreground transition-all hover:border-foreground/20 hover:text-foreground"
+                      aria-label={`Open ${project.title} live demo`}
                     >
-                      <ExternalLink className="size-4" />
-                      Live demo
+                      <ArrowUpRight className="size-4" />
+                    </a>
+                  )}
+                </div>
+                <CardDescription className="text-sm leading-relaxed">
+                  {project.description}
+                </CardDescription>
+              </CardHeader>
+
+              <div
+                className={cn(
+                  "flex flex-1 flex-col",
+                  index === 0 && "md:max-w-md",
+                )}
+              >
+                <CardContent className="flex-1 space-y-5 px-6 py-5 pt-0 md:pt-5">
+                  <ul className="space-y-2.5">
+                    {project.highlights.map((highlight) => (
+                      <li
+                        key={highlight}
+                        className="flex gap-3 text-sm text-muted-foreground"
+                      >
+                        <span className="mt-[0.45rem] size-1 shrink-0 rounded-full bg-foreground/40" />
+                        <span className="leading-relaxed">{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="secondary"
+                        className="rounded-md font-normal"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+
+                <CardFooter className="gap-2 border-t border-border/60 px-6 py-4">
+                  <Button variant="outline" size="sm" asChild>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Github className="size-4" />
+                      Source
                     </a>
                   </Button>
-                )}
-              </CardFooter>
+                  {project.demo && (
+                    <Button variant="ghost" size="sm" asChild>
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink className="size-4" />
+                        Live demo
+                      </a>
+                    </Button>
+                  )}
+                </CardFooter>
+              </div>
             </Card>
           </motion.div>
         ))}
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="mt-12 text-center"
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        className="mt-14 flex justify-center"
       >
-        <Separator className="mb-8" />
-        <Button variant="outline" asChild>
+        <Button variant="outline" asChild className="group">
           <a
             href="https://github.com/ansariarifdev"
             target="_blank"
             rel="noopener noreferrer"
           >
             View all on GitHub
-            <ExternalLink className="size-4" />
+            <ExternalLink className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </Button>
       </motion.div>

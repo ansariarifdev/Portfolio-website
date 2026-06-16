@@ -10,6 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { fadeInUp, staggerContainer, viewportOnce } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 const skillCategories = [
   {
@@ -38,23 +40,6 @@ const skillCategories = [
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-
 export default function Skills() {
   return (
     <Section id="skills">
@@ -65,27 +50,32 @@ export default function Skills() {
       />
 
       <motion.div
-        variants={container}
+        variants={staggerContainer(0.08)}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
+        viewport={viewportOnce}
         className="grid gap-4 sm:grid-cols-2"
       >
-        {skillCategories.map((category) => (
-          <motion.div key={category.category} variants={item}>
-            <Card className="h-full transition-shadow hover:shadow-md">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-base font-semibold">
+        {skillCategories.map((category, index) => (
+          <motion.div key={category.category} variants={fadeInUp}>
+            <Card
+              className={cn(
+                "surface-card-hover h-full gap-0 py-0 shadow-none",
+                index === skillCategories.length - 1 && "sm:col-span-2 sm:max-w-md sm:mx-auto sm:w-full",
+              )}
+            >
+              <CardHeader className="border-b border-border/60 px-5 py-4">
+                <CardTitle className="text-sm font-semibold tracking-tight">
                   {category.category}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex flex-wrap gap-2">
+              <CardContent className="px-5 py-4">
+                <div className="flex flex-wrap gap-1.5">
                   {category.skills.map((skill) => (
                     <Badge
                       key={skill}
                       variant="outline"
-                      className="font-normal"
+                      className="rounded-md font-normal"
                     >
                       {skill}
                     </Badge>

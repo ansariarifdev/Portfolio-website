@@ -32,15 +32,20 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-background px-6 py-12 sm:px-10">
-      <div className="mx-auto max-w-3xl">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
-          <div className="space-y-4">
+    <footer className="border-t border-border/60 bg-background px-6 py-14 sm:px-10">
+      <div className="mx-auto max-w-4xl">
+        <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
+          <div className="space-y-5">
             <Link
               href="#home"
-              className="text-lg font-semibold tracking-tight text-foreground"
+              className="group inline-flex items-center gap-2.5"
             >
-              Arif Ansari
+              <span className="flex size-8 items-center justify-center rounded-md border border-border bg-muted/50 font-mono text-xs font-semibold transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
+                AA
+              </span>
+              <span className="text-sm font-semibold tracking-tight text-foreground">
+                Arif Ansari
+              </span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
               Full-stack developer building scalable web applications with
@@ -52,9 +57,10 @@ export default function Footer() {
                 return (
                   <Button
                     key={social.label}
-                    variant="ghost"
+                    variant="outline"
                     size="icon-sm"
                     asChild
+                    className="rounded-full"
                   >
                     <a
                       href={social.href}
@@ -70,7 +76,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <nav className="flex flex-wrap gap-x-6 gap-y-2">
+          <nav className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-1">
             {footerLinks.map((link) => (
               <a
                 key={link.label}
@@ -83,7 +89,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <Separator className="my-8" />
+        <Separator className="my-10" />
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-muted-foreground">

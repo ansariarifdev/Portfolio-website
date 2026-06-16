@@ -16,6 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { fadeInUp, viewportOnce } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 const contactInfo = [
   {
@@ -74,35 +76,36 @@ export default function Contact() {
         description="I'm open to new projects, collaborations, and full-time opportunities."
       />
 
-      <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+      <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-          className="space-y-6"
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
         >
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Get in touch</CardTitle>
-              <CardDescription>
+          <Card className="surface-card-hover h-full gap-0 py-0 shadow-none">
+            <CardHeader className="px-6 py-6">
+              <CardTitle className="text-base font-semibold">
+                Get in touch
+              </CardTitle>
+              <CardDescription className="leading-relaxed">
                 Prefer email or connect on social — I typically respond within
                 24 hours.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-1 border-t border-border/60 px-6 py-6">
               {contactInfo.map((info) => {
                 const Icon = info.icon;
                 const content = (
-                  <div className="flex items-start gap-4">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted">
-                      <Icon className="size-4 text-primary" />
+                  <div className="flex items-start gap-4 px-3 py-3">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/40">
+                      <Icon className="size-4 text-foreground/70" />
                     </div>
                     <div>
-                      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      <p className="font-mono text-[0.6875rem] font-medium tracking-widest text-muted-foreground uppercase">
                         {info.label}
                       </p>
-                      <p className="mt-0.5 text-sm font-medium text-foreground">
+                      <p className="mt-1 text-sm font-medium text-foreground">
                         {info.value}
                       </p>
                     </div>
@@ -115,16 +118,18 @@ export default function Contact() {
                     href={info.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block rounded-lg transition-colors hover:bg-muted/50 -mx-2 px-2 py-1"
+                    className="block rounded-lg transition-colors hover:bg-muted/50"
                   >
                     {content}
                   </a>
                 ) : (
-                  <div key={info.label}>{content}</div>
+                  <div key={info.label} className="rounded-lg">
+                    {content}
+                  </div>
                 );
               })}
 
-              <div className="flex gap-2 pt-2">
+              <div className="flex gap-2 px-3 pt-4">
                 <Button variant="outline" size="sm" asChild>
                   <a
                     href="https://github.com/ansariarifdev"
@@ -151,19 +156,22 @@ export default function Contact() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          transition={{ delay: 0.08 }}
         >
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Send a message</CardTitle>
-              <CardDescription>
+          <Card className="surface-card-hover gap-0 py-0 shadow-none">
+            <CardHeader className="px-6 py-6">
+              <CardTitle className="text-base font-semibold">
+                Send a message
+              </CardTitle>
+              <CardDescription className="leading-relaxed">
                 Share a bit about your project or opportunity.
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="border-t border-border/60 px-6 py-6">
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>
@@ -174,6 +182,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="Your name"
                     required
+                    className="bg-background"
                   />
                 </div>
                 <div className="space-y-2">
@@ -186,6 +195,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="you@example.com"
                     required
+                    className="bg-background"
                   />
                 </div>
                 <div className="space-y-2">
@@ -198,6 +208,7 @@ export default function Contact() {
                     placeholder="Tell me about your project..."
                     rows={5}
                     required
+                    className="min-h-[120px] resize-none bg-background"
                   />
                 </div>
 
@@ -211,12 +222,20 @@ export default function Contact() {
                 </Button>
 
                 {submitStatus === "success" && (
-                  <p className="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
+                  <p
+                    className={cn(
+                      "rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800",
+                    )}
+                    role="status"
+                  >
                     Message sent successfully. I&apos;ll get back to you soon.
                   </p>
                 )}
                 {submitStatus === "error" && (
-                  <p className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+                  <p
+                    className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+                    role="alert"
+                  >
                     Something went wrong. Please try again.
                   </p>
                 )}

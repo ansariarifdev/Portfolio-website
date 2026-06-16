@@ -12,6 +12,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { fadeInUp, staggerContainer, viewportOnce } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 const features = [
   {
@@ -38,27 +40,10 @@ const features = [
 ];
 
 const stats = [
-  { number: "5+", label: "Projects" },
-  { number: "10+", label: "Collaborated" },
-  { number: "1+", label: "Years hands-on" },
+  { number: "5+", label: "Projects shipped" },
+  { number: "10+", label: "Collaborators" },
+  { number: "1+", label: "Years experience" },
 ];
-
-const listVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
 
 export default function About() {
   return (
@@ -70,32 +55,37 @@ export default function About() {
         align="left"
       />
 
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-          className="space-y-6"
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="space-y-8"
         >
-          <p className="text-base leading-relaxed text-foreground/90">
-            I build scalable backends and APIs with TypeScript, Node.js, and
-            modern runtimes. My focus spans real-time systems, clean REST
-            contracts, and performance — from WebSockets to databases and auth.
-          </p>
-          <p className="text-base leading-relaxed text-muted-foreground">
-            I translate product requirements into maintainable code: robust
-            validation, role-based access, and optimized messaging. Throughput,
-            latency, and long-term maintainability guide every decision.
-          </p>
+          <div className="space-y-5">
+            <p className="text-base leading-relaxed text-foreground/90">
+              I build scalable backends and APIs with TypeScript, Node.js, and
+              modern runtimes. My focus spans real-time systems, clean REST
+              contracts, and performance — from WebSockets to databases and auth.
+            </p>
+            <p className="text-base leading-relaxed text-muted-foreground">
+              I translate product requirements into maintainable code: robust
+              validation, role-based access, and optimized messaging. Throughput,
+              latency, and long-term maintainability guide every decision.
+            </p>
+          </div>
 
-          <dl className="grid grid-cols-3 gap-6 border-t border-border pt-8">
+          <dl className="grid grid-cols-3 gap-4">
             {stats.map((stat) => (
-              <div key={stat.label}>
+              <div
+                key={stat.label}
+                className="surface-card surface-card-hover rounded-lg p-4"
+              >
                 <dt className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
                   {stat.number}
                 </dt>
-                <dd className="mt-1 text-sm text-muted-foreground">
+                <dd className="mt-1.5 text-xs leading-snug text-muted-foreground sm:text-sm">
                   {stat.label}
                 </dd>
               </div>
@@ -105,31 +95,42 @@ export default function About() {
 
         <motion.div
           className="space-y-4"
-          variants={listVariants}
+          variants={staggerContainer(0.1)}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
+          viewport={viewportOnce}
         >
           {features.map((feature) => {
             const Icon = feature.icon;
             return (
-              <motion.div key={feature.title} variants={cardVariants}>
-                <Card className="transition-shadow hover:shadow-md">
-                  <CardHeader className="flex flex-row items-start gap-4 space-y-0 pb-2">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <Icon className="size-5" />
+              <motion.div key={feature.title} variants={fadeInUp}>
+                <Card
+                  className={cn(
+                    "surface-card-hover gap-0 py-0 shadow-none",
+                    "group overflow-hidden",
+                  )}
+                >
+                  <CardHeader className="flex flex-row items-start gap-4 space-y-0 px-5 py-5">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/50 text-foreground transition-colors group-hover:border-primary/20 group-hover:bg-primary/5">
+                      <Icon className="size-[1.125rem]" />
                     </div>
-                    <div className="min-w-0 space-y-1">
-                      <CardTitle className="text-base">{feature.title}</CardTitle>
+                    <div className="min-w-0 space-y-1.5">
+                      <CardTitle className="text-base font-semibold">
+                        {feature.title}
+                      </CardTitle>
                       <CardDescription className="leading-relaxed">
                         {feature.description}
                       </CardDescription>
                     </div>
                   </CardHeader>
-                  <CardContent className="pl-[4.5rem] pt-0">
-                    <div className="flex flex-wrap gap-2">
+                  <CardContent className="border-t border-border/60 px-5 py-4 pl-[4.25rem]">
+                    <div className="flex flex-wrap gap-1.5">
                       {feature.tech.map((tech) => (
-                        <Badge key={tech} variant="secondary" className="font-normal">
+                        <Badge
+                          key={tech}
+                          variant="secondary"
+                          className="rounded-md font-normal"
+                        >
                           {tech}
                         </Badge>
                       ))}

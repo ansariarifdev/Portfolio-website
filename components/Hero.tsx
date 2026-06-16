@@ -5,6 +5,7 @@ import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { fadeInUp, staggerContainer } from "@/lib/motion";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/ansariarifdev", label: "GitHub" },
@@ -20,87 +21,91 @@ const socialLinks = [
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-
 export default function Hero() {
   return (
     <section
       id="home"
-      className="scroll-mt-20 border-b border-border px-6 py-24 sm:px-10 sm:py-32 md:py-40"
+      className="scroll-mt-[4.5rem] border-b border-border/60 px-6 py-28 sm:px-10 sm:py-36 md:py-44"
     >
       <motion.div
-        className="mx-auto max-w-3xl"
-        variants={container}
+        className="mx-auto max-w-4xl"
+        variants={staggerContainer(0.12, 0.08)}
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={item}>
-          <Badge variant="secondary" className="mb-6 rounded-full px-3 py-1">
+        <motion.div variants={fadeInUp} className="mb-8 flex items-center gap-3">
+          <Badge
+            variant="outline"
+            className="gap-2 rounded-full px-3 py-1 font-normal"
+          >
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+              <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+            </span>
             Available for opportunities
           </Badge>
         </motion.div>
 
-        <motion.h1
-          variants={item}
-          className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl md:leading-[1.1]"
+        <motion.p
+          variants={fadeInUp}
+          className="font-mono text-sm tracking-wide text-muted-foreground"
         >
-          Full-stack developer building scalable, production-ready web
-          applications.
+          Full-Stack Developer
+        </motion.p>
+
+        <motion.h1
+          variants={fadeInUp}
+          className="mt-3 text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl md:leading-[1.08]"
+        >
+          Arif Ansari
         </motion.h1>
 
         <motion.p
-          variants={item}
-          className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground"
+          variants={fadeInUp}
+          className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl"
         >
-          Hi, I&apos;m{" "}
-          <span className="font-medium text-foreground">Arif Ansari</span>. I
-          specialize in MERN stack and Next.js — from real-time backends to
-          polished frontends with clean architecture and thoughtful UX.
+          I build scalable, production-ready web applications with the MERN
+          stack and Next.js — from real-time backends to polished frontends
+          with clean architecture and thoughtful UX.
         </motion.p>
 
         <motion.div
-          variants={item}
+          variants={fadeInUp}
           className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
         >
-          <Button size="lg" asChild>
+          <Button size="lg" asChild className="group">
             <a href="#projects">
               View my work
-              <ArrowRight className="size-4" />
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </a>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <a href="#contact">Contact me</a>
+            <a
+              href="https://drive.google.com/file/d/1HK9TQOc1tgKDViJy9Lf8sIAtoS0XM4m_/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download resume
+            </a>
           </Button>
         </motion.div>
 
-        <motion.div variants={item}>
-          <Separator className="my-10" />
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">Connect</span>
-            <div className="flex gap-1">
+        <motion.div variants={fadeInUp}>
+          <Separator className="my-12" />
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted-foreground">
+              Based in Bangalore, India · Open to remote & on-site roles
+            </p>
+            <div className="flex items-center gap-1">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
                   <Button
                     key={social.label}
-                    variant="ghost"
+                    variant="outline"
                     size="icon-sm"
                     asChild
+                    className="rounded-full"
                   >
                     <a
                       href={social.href}
