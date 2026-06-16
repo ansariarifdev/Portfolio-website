@@ -83,26 +83,28 @@ export default function Contact() {
           whileInView="visible"
           viewport={viewportOnce}
         >
-          <Card className="surface-card-hover h-full gap-0 py-0 shadow-none">
-            <CardHeader className="px-6 py-6">
-              <CardTitle className="text-base font-semibold">
-                Get in touch
-              </CardTitle>
-              <CardDescription className="leading-relaxed">
-                Prefer email or connect on social — I typically respond within
-                24 hours.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-1 border-t border-border/60 px-6 py-6">
+          <Card className="surface-card-hover h-full gap-0 overflow-hidden py-0 shadow-none">
+            <div className="brick-pattern relative bg-brand-teal px-6 py-8 sm:px-8">
+              <div className="relative z-10">
+                <CardTitle className="text-xl font-bold text-white">
+                  Get in touch
+                </CardTitle>
+                <CardDescription className="mt-2 text-sm leading-relaxed text-white/75">
+                  Prefer email or connect on social — I typically respond within
+                  24 hours.
+                </CardDescription>
+              </div>
+            </div>
+            <CardContent className="space-y-1 px-6 py-6">
               {contactInfo.map((info) => {
                 const Icon = info.icon;
                 const content = (
                   <div className="flex items-start gap-4 px-3 py-3">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/40">
-                      <Icon className="size-4 text-foreground/70" />
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-purple/80 text-brand-navy">
+                      <Icon className="size-4" strokeWidth={1.75} />
                     </div>
                     <div>
-                      <p className="font-mono text-[0.6875rem] font-medium tracking-widest text-muted-foreground uppercase">
+                      <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
                         {info.label}
                       </p>
                       <p className="mt-1 text-sm font-medium text-foreground">
@@ -118,19 +120,24 @@ export default function Contact() {
                     href={info.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block rounded-lg transition-colors hover:bg-muted/50"
+                    className="block rounded-xl transition-colors hover:bg-muted/60"
                   >
                     {content}
                   </a>
                 ) : (
-                  <div key={info.label} className="rounded-lg">
+                  <div key={info.label} className="rounded-xl">
                     {content}
                   </div>
                 );
               })}
 
               <div className="flex gap-2 px-3 pt-4">
-                <Button variant="outline" size="sm" asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+                  className="rounded-full"
+                >
                   <a
                     href="https://github.com/ansariarifdev"
                     target="_blank"
@@ -140,7 +147,12 @@ export default function Contact() {
                     GitHub
                   </a>
                 </Button>
-                <Button variant="outline" size="sm" asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+                  className="rounded-full"
+                >
                   <a
                     href="https://www.linkedin.com/in/ansariarif-dev/"
                     target="_blank"
@@ -182,7 +194,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="Your name"
                     required
-                    className="bg-background"
+                    className="rounded-xl bg-background"
                   />
                 </div>
                 <div className="space-y-2">
@@ -195,7 +207,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="you@example.com"
                     required
-                    className="bg-background"
+                    className="rounded-xl bg-background"
                   />
                 </div>
                 <div className="space-y-2">
@@ -208,13 +220,13 @@ export default function Contact() {
                     placeholder="Tell me about your project..."
                     rows={5}
                     required
-                    className="min-h-[120px] resize-none bg-background"
+                    className="min-h-[120px] resize-none rounded-xl bg-background"
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  className="w-full"
+                  className="w-full rounded-full bg-brand-navy hover:bg-brand-navy-light"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Sending..." : "Send message"}
@@ -224,7 +236,7 @@ export default function Contact() {
                 {submitStatus === "success" && (
                   <p
                     className={cn(
-                      "rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800",
+                      "rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800",
                     )}
                     role="status"
                   >
@@ -233,7 +245,7 @@ export default function Contact() {
                 )}
                 {submitStatus === "error" && (
                   <p
-                    className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+                    className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
                     role="alert"
                   >
                     Something went wrong. Please try again.

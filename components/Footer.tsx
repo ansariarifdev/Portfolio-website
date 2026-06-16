@@ -32,26 +32,21 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border/60 bg-background px-6 py-14 sm:px-10">
-      <div className="mx-auto max-w-4xl">
+    <footer className="brick-pattern relative overflow-hidden bg-brand-navy px-6 py-14 sm:px-8 md:px-12 lg:px-16">
+      <div className="relative z-10 mx-auto max-w-6xl">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-5">
             <Link
               href="#home"
-              className="group inline-flex items-center gap-2.5"
+              className="inline-block text-xl font-bold tracking-tight text-white"
             >
-              <span className="flex size-8 items-center justify-center rounded-md border border-border bg-muted/50 font-mono text-xs font-semibold transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
-                AA
-              </span>
-              <span className="text-sm font-semibold tracking-tight text-foreground">
-                Arif Ansari
-              </span>
+              Arif<span className="text-brand-teal">.</span>
             </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+            <p className="max-w-xs text-sm leading-relaxed text-white/65">
               Full-stack developer building scalable web applications with
               modern technologies.
             </p>
-            <div className="flex gap-1">
+            <div className="flex gap-2">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -60,7 +55,7 @@ export default function Footer() {
                     variant="outline"
                     size="icon-sm"
                     asChild
-                    className="rounded-full"
+                    className="rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
                   >
                     <a
                       href={social.href}
@@ -81,7 +76,7 @@ export default function Footer() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="text-sm text-white/65 transition-colors hover:text-white"
               >
                 {link.label}
               </a>
@@ -89,14 +84,19 @@ export default function Footer() {
           </nav>
         </div>
 
-        <Separator className="my-10" />
+        <Separator className="my-10 bg-white/15" />
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-white/55">
             &copy; {currentYear} Arif Ansari. All rights reserved.
           </p>
           <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-            <Button variant="outline" size="sm" asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              className="rounded-full border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"
+            >
               <a href="#home" className="gap-2">
                 Back to top
                 <ArrowUp className="size-4" />

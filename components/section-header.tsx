@@ -28,29 +28,20 @@ export function SectionHeader({
       whileInView="visible"
       viewport={viewportOnce}
       className={cn(
-        "mb-14 md:mb-20",
+        "mb-12 md:mb-16",
         isCenter ? "mx-auto max-w-2xl text-center" : "max-w-2xl",
         className,
       )}
     >
-      <div
+      <span
         className={cn(
-          "mb-5 flex items-center gap-3",
-          isCenter && "justify-center",
+          "mb-4 inline-block rounded-full bg-brand-teal/15 px-4 py-1 text-xs font-semibold tracking-wide text-brand-teal-dark uppercase",
+          isCenter && "mx-auto",
         )}
       >
-        <span className="font-mono text-xs font-medium tracking-widest text-muted-foreground uppercase">
-          {label}
-        </span>
-        <span
-          className={cn(
-            "h-px bg-border",
-            isCenter ? "w-12" : "flex-1 max-w-24",
-          )}
-          aria-hidden
-        />
-      </div>
-      <h2 className="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        {label}
+      </span>
+      <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
         {title}
       </h2>
       {description && (

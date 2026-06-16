@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Server, Zap, Shield } from "lucide-react";
 import { SectionHeader } from "@/components/section-header";
 import { Section } from "@/components/site-shell";
+import { BentoPanel, BentoTag } from "@/components/bento-panel";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -15,90 +16,90 @@ import {
 import { fadeInUp, staggerContainer, viewportOnce } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
+const skillTags = [
+  "Full Stack Development",
+  "Real-World Projects",
+  "WebSockets & Real-time",
+  "Production Ready",
+  "DevOps & Deployment",
+  "TypeScript & Next.js",
+];
+
 const features = [
   {
     icon: Server,
     title: "Scalable backend systems",
     description:
-      "Architecting high-performance server-side applications with Node.js, Bun, and modern frameworks — from monoliths to modular services.",
+      "High-performance server-side applications with Node.js, Bun, and modern frameworks.",
     tech: ["Node.js", "Bun", "Hono", "Microservices"],
   },
   {
     icon: Zap,
     title: "Real-time infrastructure",
     description:
-      "Event-driven architectures for live interaction — WebSockets, pub/sub messaging, and low-latency data pipelines at scale.",
+      "Event-driven architectures — WebSockets, pub/sub, and low-latency pipelines.",
     tech: ["WebSockets", "Socket.io", "Redis", "Pub/Sub"],
   },
   {
     icon: Shield,
     title: "Data & security",
     description:
-      "Type-safe database schemas, secure auth flows, RBAC, SQL optimization, and containerized deployments.",
+      "Type-safe schemas, secure auth, RBAC, and containerized deployments.",
     tech: ["PostgreSQL", "Prisma", "JWT", "Docker"],
   },
 ];
 
-const stats = [
-  { number: "5+", label: "Projects shipped" },
-  { number: "10+", label: "Collaborators" },
-  { number: "1+", label: "Years experience" },
-];
-
 export default function About() {
   return (
-    <Section id="about" variant="muted">
-      <SectionHeader
-        label="About"
-        title="Engineering reliable systems end to end"
-        description="Backend-focused developer with a strong full-stack toolkit — building APIs, real-time features, and user-facing products."
-        align="left"
-      />
-
-      <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+    <>
+      <Section id="about" className="pt-8 md:pt-12">
         <motion.div
-          variants={fadeInUp}
+          variants={staggerContainer(0.12)}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="space-y-8"
+          className="grid gap-5 lg:grid-cols-2"
         >
-          <div className="space-y-5">
-            <p className="text-base leading-relaxed text-foreground/90">
-              I build scalable backends and APIs with TypeScript, Node.js, and
-              modern runtimes. My focus spans real-time systems, clean REST
-              contracts, and performance — from WebSockets to databases and auth.
-            </p>
-            <p className="text-base leading-relaxed text-muted-foreground">
-              I translate product requirements into maintainable code: robust
-              validation, role-based access, and optimized messaging. Throughput,
-              latency, and long-term maintainability guide every decision.
-            </p>
-          </div>
-
-          <dl className="grid grid-cols-3 gap-4">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="surface-card surface-card-hover rounded-lg p-4"
-              >
-                <dt className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-                  {stat.number}
-                </dt>
-                <dd className="mt-1.5 text-xs leading-snug text-muted-foreground sm:text-sm">
-                  {stat.label}
-                </dd>
+          <motion.div variants={fadeInUp}>
+            <BentoPanel
+              variant="teal"
+              title="Production-ready skills that matter"
+              description="Master development through real-world applications, not tutorials — building systems that scale."
+            >
+              <div className="flex flex-wrap gap-2">
+                {skillTags.map((tag) => (
+                  <BentoTag key={tag} variant="teal">
+                    {tag}
+                  </BentoTag>
+                ))}
               </div>
-            ))}
-          </dl>
+            </BentoPanel>
+          </motion.div>
+
+          <motion.div variants={fadeInUp}>
+            <BentoPanel
+              variant="navy"
+              curve="alt"
+              title="Engineering reliable systems end to end"
+              description="Backend-focused full-stack developer building APIs, real-time features, and user-facing products with clean architecture and thoughtful UX."
+            />
+          </motion.div>
         </motion.div>
+      </Section>
+
+      <Section variant="muted">
+        <SectionHeader
+          label="About"
+          title="What I bring to the table"
+          description="I translate product requirements into maintainable code — robust validation, role-based access, and optimized messaging."
+        />
 
         <motion.div
-          className="space-y-4"
           variants={staggerContainer(0.1)}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
+          className="grid gap-5 md:grid-cols-3"
         >
           {features.map((feature) => {
             const Icon = feature.icon;
@@ -106,15 +107,14 @@ export default function About() {
               <motion.div key={feature.title} variants={fadeInUp}>
                 <Card
                   className={cn(
-                    "surface-card-hover gap-0 py-0 shadow-none",
-                    "group overflow-hidden",
+                    "surface-card surface-card-hover h-full gap-0 overflow-hidden py-0 shadow-none",
                   )}
                 >
-                  <CardHeader className="flex flex-row items-start gap-4 space-y-0 px-5 py-5">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/50 text-foreground transition-colors group-hover:border-primary/20 group-hover:bg-primary/5">
-                      <Icon className="size-[1.125rem]" />
+                  <CardHeader className="space-y-4 px-6 py-6">
+                    <div className="flex size-11 items-center justify-center rounded-xl bg-brand-purple/80 text-brand-navy">
+                      <Icon className="size-5" strokeWidth={1.75} />
                     </div>
-                    <div className="min-w-0 space-y-1.5">
+                    <div className="space-y-2">
                       <CardTitle className="text-base font-semibold">
                         {feature.title}
                       </CardTitle>
@@ -123,13 +123,13 @@ export default function About() {
                       </CardDescription>
                     </div>
                   </CardHeader>
-                  <CardContent className="border-t border-border/60 px-5 py-4 pl-[4.25rem]">
+                  <CardContent className="border-t border-border/60 px-6 py-4">
                     <div className="flex flex-wrap gap-1.5">
                       {feature.tech.map((tech) => (
                         <Badge
                           key={tech}
-                          variant="secondary"
-                          className="rounded-md font-normal"
+                          variant="outline"
+                          className="rounded-full border-brand-navy/15 bg-brand-navy/5 font-normal text-brand-navy"
                         >
                           {tech}
                         </Badge>
@@ -141,7 +141,7 @@ export default function About() {
             );
           })}
         </motion.div>
-      </div>
-    </Section>
+      </Section>
+    </>
   );
 }

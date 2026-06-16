@@ -67,9 +67,7 @@ export default function Navbar() {
 
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
+          if (entry.isIntersecting) setActiveSection(id);
         },
         { rootMargin: "-40% 0px -50% 0px", threshold: 0 },
       );
@@ -100,26 +98,21 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "sticky top-0 z-50 border-b transition-all duration-300",
+        "sticky top-0 z-50 transition-all duration-300",
         isScrolled
-          ? "border-border/80 bg-background/85 shadow-sm backdrop-blur-lg"
-          : "border-transparent bg-background/60 backdrop-blur-sm",
+          ? "border-b border-border/60 bg-background/90 shadow-sm backdrop-blur-lg"
+          : "bg-background/80 backdrop-blur-sm",
       )}
     >
-      <nav className="flex h-[4.5rem] items-center justify-between px-6 sm:px-10">
+      <nav className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between px-6 sm:px-8 md:px-12 lg:px-16">
         <Link
           href="#home"
-          className="group flex items-center gap-2 text-foreground"
+          className="text-xl font-bold tracking-tight text-foreground"
         >
-          <span className="flex size-8 items-center justify-center rounded-md border border-border bg-muted/50 font-mono text-xs font-semibold transition-colors group-hover:border-primary/30 group-hover:bg-primary/5">
-            AA
-          </span>
-          <span className="hidden text-sm font-semibold tracking-tight sm:inline">
-            Arif Ansari
-          </span>
+          Arif<span className="text-brand-teal">.</span>
         </Link>
 
-        <div className="hidden items-center gap-0.5 lg:flex">
+        <div className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) => (
             <a
               key={item.label}
@@ -127,9 +120,9 @@ export default function Navbar() {
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
               className={cn(
-                "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
                 !item.external && activeSection === item.id
-                  ? "text-foreground"
+                  ? "text-brand-navy"
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
@@ -137,7 +130,7 @@ export default function Navbar() {
               {!item.external && activeSection === item.id && (
                 <motion.span
                   layoutId="nav-indicator"
-                  className="absolute inset-x-3 -bottom-[1.125rem] h-px bg-foreground"
+                  className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-brand-teal"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
@@ -146,30 +139,32 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
-          <div className="mr-1 flex items-center gap-0.5">
-            {socialLinks.map((social) => {
-              const Icon = social.icon;
-              return (
-                <Button
-                  key={social.label}
-                  variant="ghost"
-                  size="icon-sm"
-                  asChild
-                  className="text-muted-foreground hover:text-foreground"
+          {socialLinks.map((social) => {
+            const Icon = social.icon;
+            return (
+              <Button
+                key={social.label}
+                variant="ghost"
+                size="icon-sm"
+                asChild
+                className="rounded-full text-muted-foreground hover:text-brand-navy"
+              >
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
                 >
-                  <a
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                  >
-                    <Icon className="size-4" />
-                  </a>
-                </Button>
-              );
-            })}
-          </div>
-          <Button size="sm" asChild>
+                  <Icon className="size-4" />
+                </a>
+              </Button>
+            );
+          })}
+          <Button
+            size="sm"
+            asChild
+            className="rounded-full bg-brand-navy px-5 hover:bg-brand-navy-light"
+          >
             <a href="#contact">Get in touch</a>
           </Button>
         </div>
@@ -234,7 +229,11 @@ export default function Navbar() {
                 );
               })}
             </div>
-            <Button className="mt-6 w-full" asChild onClick={() => setOpen(false)}>
+            <Button
+              className="mt-6 w-full rounded-full bg-brand-navy hover:bg-brand-navy-light"
+              asChild
+              onClick={() => setOpen(false)}
+            >
               <a href="#contact">Get in touch</a>
             </Button>
           </SheetContent>

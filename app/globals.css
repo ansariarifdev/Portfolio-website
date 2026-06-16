@@ -9,6 +9,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-light: var(--brand-navy-light);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-teal-dark: var(--brand-teal-dark);
+  --color-brand-purple: var(--brand-purple);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,25 +53,33 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(0.99 0.002 260);
-  --foreground: oklch(0.17 0.015 260);
+  --radius: 0.75rem;
+
+  /* Brand palette — inspired by 100xDevs navy + teal */
+  --brand-navy: oklch(0.24 0.09 265);
+  --brand-navy-light: oklch(0.32 0.1 265);
+  --brand-teal: oklch(0.62 0.11 185);
+  --brand-teal-dark: oklch(0.52 0.1 185);
+  --brand-purple: oklch(0.82 0.06 290);
+
+  --background: oklch(0.985 0.004 260);
+  --foreground: oklch(0.2 0.04 265);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.17 0.015 260);
+  --card-foreground: oklch(0.2 0.04 265);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.17 0.015 260);
-  --primary: oklch(0.28 0.04 260);
+  --popover-foreground: oklch(0.2 0.04 265);
+  --primary: var(--brand-navy);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.965 0.006 260);
-  --secondary-foreground: oklch(0.28 0.02 260);
+  --secondary: oklch(0.96 0.008 260);
+  --secondary-foreground: oklch(0.28 0.04 265);
   --muted: oklch(0.965 0.006 260);
-  --muted-foreground: oklch(0.48 0.02 260);
-  --accent: oklch(0.955 0.008 260);
-  --accent-foreground: oklch(0.22 0.02 260);
+  --muted-foreground: oklch(0.48 0.025 265);
+  --accent: oklch(0.94 0.02 185);
+  --accent-foreground: oklch(0.28 0.06 185);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.905 0.008 260);
-  --input: oklch(0.905 0.008 260);
-  --ring: oklch(0.55 0.04 260);
+  --border: oklch(0.91 0.01 260);
+  --input: oklch(0.91 0.01 260);
+  --ring: oklch(0.55 0.06 265);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -96,25 +109,52 @@
   }
 
   ::selection {
-    @apply bg-primary/10 text-foreground;
+    @apply bg-brand-teal/25 text-foreground;
   }
 }
 
 @layer utilities {
-  .site-grid {
+  .bento-curve {
+    @apply rounded-2xl rounded-tr-[4.5rem] sm:rounded-tr-[5.5rem];
+  }
+
+  .bento-curve-alt {
+    @apply rounded-2xl rounded-bl-[4.5rem] sm:rounded-bl-[5.5rem];
+  }
+
+  .brick-pattern {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .brick-pattern::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.12;
+    pointer-events: none;
     background-image:
-      linear-gradient(to right, oklch(0.905 0.008 260 / 0.5) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.905 0.008 260 / 0.5) 1px, transparent 1px);
-    background-size: 64px 64px;
-    background-position: center top;
+      linear-gradient(
+        335deg,
+        rgba(255, 255, 255, 0.45) 22px,
+        transparent 22px
+      ),
+      linear-gradient(
+        155deg,
+        rgba(255, 255, 255, 0.45) 22px,
+        transparent 22px
+      );
+    background-size: 58px 34px;
+    background-position: 0 0, 29px 17px;
   }
 
   .surface-card {
-    @apply rounded-xl border border-border bg-card shadow-sm transition-all duration-300;
+    @apply rounded-2xl border border-border bg-card shadow-sm transition-all duration-300;
   }
 
   .surface-card-hover {
-    @apply hover:border-border/80 hover:shadow-md;
+    @apply hover:border-brand-teal/30 hover:shadow-lg hover:shadow-brand-navy/5;
   }
 
   .text-balance {
