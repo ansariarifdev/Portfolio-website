@@ -111,7 +111,7 @@ export default function Hero() {
                 className="h-12 rounded-full border-foreground/15 px-7 hover:bg-muted"
               >
                 <a
-                  href="https://drive.google.com/file/d/1HK9TQOc1tgKDViJy9Lf8sIAtoS0XM4m_/view?usp=drive_link"
+                  href="https://drive.google.com/file/d/1lbc9c-D-Rc4yAaV0_xhCdlTmIzuo7b2X/view?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
