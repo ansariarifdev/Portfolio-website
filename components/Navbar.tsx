@@ -23,7 +23,7 @@ const navItems = [
   { label: "Contact", href: "#contact", id: "contact" },
   {
     label: "Resume",
-    href: "https://drive.google.com/file/d/1HK9TQOc1tgKDViJy9Lf8sIAtoS0XM4m_/view?usp=drive_link",
+    href: "https://drive.google.com/file/d/1lbc9c-D-Rc4yAaV0_xhCdlTmIzuo7b2X/view?usp=drive_link",
     external: true,
     id: "resume",
   },
